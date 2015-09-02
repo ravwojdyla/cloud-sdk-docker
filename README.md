@@ -1,7 +1,7 @@
 cloud-sdk-docker
 ================
 
-[`google/cloud-sdk`](https://index.docker.io/u/google/cloud-sdk/) is a [Docker](https://docker.io) image bundling all the components and dependencies
+[`ravwojdyla/cloud-sdk-docker`](https://hub.docker.com/r/ravwojdyla/cloud-sdk-docker/) is a [Docker](https://docker.io) image bundling all the components and dependencies
 of the [Google Cloud SDK](https://cloud.google.com/sdk/):
 
 - [App Engine SDK for Go](https://cloud.google.com/appengine/docs/go/)
@@ -14,16 +14,18 @@ of the [Google Cloud SDK](https://cloud.google.com/sdk/):
 - [Compute Engine Command Line Tool](https://cloud.google.com/compute/docs/gcloud-compute/)
 - [Preview Command Line Tools](https://cloud.google.com/sdk/gcloud/reference/preview/)
 
+NOTE: this is a fork of [`google/cloud-sdk/`](https://index.docker.io/u/google/cloud-sdk/).
+
 ## Usage
 
 Follow these instructions if you are running docker *outside* of Google
 Compute Engine:
 
     # get the cloud sdk image
-    $ docker pull google/cloud-sdk
+    $ docker pull ravwojdyla/cloud-sdk-docker
 
     # auth & save the credentials in gcloud-config volumes
-    $ docker run -t -i --name gcloud-config google/cloud-sdk gcloud auth login
+    $ docker run -t -i --name gcloud-config ravwojdyla/cloud-sdk-docker gcloud auth login
     Go to the following link in your browser: ...
     Enter verification code: ...
     You are now logged in as [...]
@@ -32,21 +34,21 @@ Compute Engine:
     gcloud config set project ...
 
     # If you would like to use service account instead please look here:
-    $ docker run -t -i --name gcloud-config google/cloud-sdk gcloud auth activate-service-account <your-service-account-email> --key-file /tmp/your-key.p12 --project <your-project-id>
+    $ docker run -t -i --name gcloud-config ravwojdyla/cloud-sdk-docker gcloud auth activate-service-account <your-service-account-email> --key-file /tmp/your-key.p12 --project <your-project-id>
 
     # re-use the credentials from gcloud-config volumes & run sdk commands
-    $ docker run --rm -ti --volumes-from gcloud-config google/cloud-sdk gcutil listinstances
-    $ docker run --rm -ti --volumes-from gcloud-config google/cloud-sdk gsutil ls
-    $ docker run --rm -ti --volumes-from gcloud-config google/cloud-sdk gcloud components list
-    $ docker run --rm -ti --volumes-from gcloud-config google/cloud-sdk gcloud version
+    $ docker run --rm -ti --volumes-from gcloud-config ravwojdyla/cloud-sdk-docker gcutil listinstances
+    $ docker run --rm -ti --volumes-from gcloud-config ravwojdyla/cloud-sdk-docker gsutil ls
+    $ docker run --rm -ti --volumes-from gcloud-config ravwojdyla/cloud-sdk-docker gcloud components list
+    $ docker run --rm -ti --volumes-from gcloud-config ravwojdyla/cloud-sdk-docker gcloud version
 
 If you are using this image from *within* [Google Compute Engine](https://cloud.google.com/compute/). If you enable a Service Account with the necessary scopes, there is no need to auth or use a config volume:
 
     # get the cloud sdk image
-    $ docker pull google/cloud-sdk
+    $ docker pull ravwojdyla/cloud-sdk-docker
 
     # just start using the sdk commands
-    $ docker run --rm -ti google/cloud-sdk gcutil listinstances
-    $ docker run --rm -ti google/cloud-sdk gsutil ls
-    $ docker run --rm -ti google/cloud-sdk gcloud components list
-    $ docker run --rm -ti google/cloud-sdk gcloud version
+    $ docker run --rm -ti ravwojdyla/cloud-sdk-docker gcutil listinstances
+    $ docker run --rm -ti ravwojdyla/cloud-sdk-docker gsutil ls
+    $ docker run --rm -ti ravwojdyla/cloud-sdk-docker gcloud components list
+    $ docker run --rm -ti ravwojdyla/cloud-sdk-docker gcloud version
